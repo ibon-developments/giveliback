@@ -8,3 +8,5 @@ Web DApp to track all the books from your library which have been lended to frie
 * Define the user actions
 * Design the architecture
 * Outline the Smart Contract
+
+
