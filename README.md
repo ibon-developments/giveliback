@@ -5,7 +5,7 @@
 Web DApp to track all the books from your library which have been lended to friends and colleagues. A true bond between the analogue and digital world.
 
 ## Architecture
-* Python [flask+CherryPy]
+* Python 3.5 [Flask+CherryPy]
 * Angular
 * POA (Proof of Authority)
 * Target network: Quorum | Rinkeby
@@ -16,22 +16,22 @@ Web DApp to track all the books from your library which have been lended to frie
 * Outline the Smart Contract
 * Slim the requirements.txt
 
-### Setting up the environment (Ubuntu-alike)
+### Setting up the environment (Ubuntu 16.04 alike)
 #### Requirements
 ##### Backend:
-* Python3
+* Python 3.5
 `sudo apt-get update`
 `sudo apt-get install python3-dev`
 * solc
 `sudo add-apt-repository ppa:ethereum/ethereum`
 `sudo apt-get update`
 `sudo apt-get install solc`
-* Python Modules via requirements.txt {pip, web3py, py-solc, jsonstream, jupyter, ...}
+* Python Modules via requirements.txt {pip, web3py, py-solc, jsonstream, Flask, CherryPy, ...}
 * git
 `sudo apt-get update`
 `sudo apt-get install git`
 ##### Frontend:
-* NPM
+* NPM `apt-get install npm`
 * Angular
 #### Steps
 * Clone the repository `git clone https://github.com/ibon-developments/giveliback.git`
