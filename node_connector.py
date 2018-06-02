@@ -1,0 +1,2 @@
+class NodeConnector:
+    pass
