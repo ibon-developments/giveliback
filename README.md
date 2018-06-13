@@ -59,4 +59,5 @@ Web DApp to track all the books from your library which have been lended to frie
 There are several files of contracts which GiveLibAck relies upon.
 * Base.sol: Contract ownership, overflow management on mathematical functions
 * Bookshelf.sol: Book creation
-* GiveLibAck.sol: Book management including request and lending. Book request involves a payment fee
+* GiveLibAck.sol: Book management including request and lending based on ERC721. Book request involves a payment fee
+
