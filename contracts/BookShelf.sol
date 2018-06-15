@@ -8,14 +8,11 @@ import "./Base.sol";
 
 contract BookShelf is Base{
 
-  //*****
   	using SafeMath for uint256;
+    using SafeMath64 for uint64;
     using SafeMath32 for uint32;
     using SafeMath16 for uint16;
-    uint public book_id;
-    uint public user_id;
-//*****
-    event NewBook(uint bookId, string name, uint isbn);
+    event NewBook(uint bookId, uint isbn);
 
 
   struct Book {
@@ -31,15 +28,15 @@ contract BookShelf is Base{
     mapping (address => uint) ownerBooksCount;
 
     ///@dev By default, current holder is the msg.sender
-    function _createBook(uint32 _isbn) internal {
-        uint id = zombies.push(Books(_isbn, msg.sender,0)) - 1;
+    function _createBook(uint64 _isbn) internal {
+        uint id = books.push(Book(_isbn, msg.sender,0)) - 1;
         bookToOwner[id] = msg.sender;
-        ownerBookCount[msg.sender] = ownerBookCount[msg.sender].add(1);
-        NewBook(id, _name, _isbn);
+        ownerBooksCount[msg.sender] = ownerBooksCount[msg.sender].add(1);
+        NewBook(id, _isbn);
     }
 
-    function createBook(uint32 _isbn) public {
-        require(ownerBookCount[msg.sender] > 100); //Only for users that have not more than 100 books
+    function createBook(uint64 _isbn) public {
+        require(ownerBooksCount[msg.sender] < 100); //Only for users that have not more than 100 books
         _createBook(_isbn);
     }
 
