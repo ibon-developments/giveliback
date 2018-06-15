@@ -1,5 +1,6 @@
 pragma solidity ^0.4.23;
 import "./BookShelf.sol";
+import "./ERC721.sol";
 
 
 contract GiveLibAck is BookShelf, ERC721 {
@@ -13,7 +14,7 @@ contract GiveLibAck is BookShelf, ERC721 {
   }
 
   function balanceOf(address _owner) public view returns (uint256 _balance) {
-    return ownerBookCount[_owner];
+    return ownerBooksCount[_owner];
   }
 
   function ownerOf(uint256 _tokenId) public view returns (address _owner) {
@@ -21,7 +22,7 @@ contract GiveLibAck is BookShelf, ERC721 {
   }
 
   ///@notice Ability to modify the amount for lending books
-  function setLendingFee (uint _fee) external onlyOwner{
+  function setLendingFee (uint _fee) external onlyOwner {
     lendingFee = _fee;
   }
 
@@ -36,28 +37,26 @@ contract GiveLibAck is BookShelf, ERC721 {
       }
     }
     return result;
-
-    function changeIsbn(uint _bookId, string _newIsbn) external theOwnerOf(_bookId) {
-       zombies[_bookId].isbn = _newIsbn;
+    }
+    function changeIsbn(uint _tokenId, uint64 _newIsbn) external theOwnerOf(_tokenId) {
+       books[_tokenId].isbn = _newIsbn;
      }
 
-     function _lendBook(address _from, address _to, uint256 _tokenId) private{
-       ownerBooksCount[_from] = ownerBooksCount[_from].add(1);
-       ownerBooksCount[_to] = ownerBooksCount[_to].sub(1);
+     function _transfer(address _from, address _to, uint256 _tokenId) private{
+       ownerBooksCount[_from] = ownerBooksCount[_from].sub(1);
+       ownerBooksCount[_to] = ownerBooksCount[_to].add(1);
        bookToOwner[_tokenId] = _to;
-       Transfer(_from, _to, _tokenId);
+       emit Transfer(_from, _to, _tokenId);
      }
 
     ///@dev Requires the book to be of the current user and that the  current holder is the user
-    function lendBook(address _to, uint256 _tokenId) public theOwnerOf(_bookId){
-      _transfer(msg.sender, _to, _tokenId);
-
-      //Change the book's holder
-    }
+  function transfer(address _to, uint256 _tokenId) public theOwnerOf(_tokenId) {
+    _transfer(msg.sender, _to, _tokenId);
+  }
 
     function approve(address _to, uint256 _tokenId) public theOwnerOf(_tokenId) {
       bookApprovals[_tokenId] = _to;
-      Approval(msg.sender, _to, _tokenId);
+      emit Approval(msg.sender, _to, _tokenId);
     }
 
     function takeOwnership(uint256 _tokenId) public {
@@ -69,10 +68,10 @@ contract GiveLibAck is BookShelf, ERC721 {
     //@title requestBook
     //@author Esteve Serra Clavera
     //notice Some user requests a book and pays for such request
-    function requestBook(uint _bookId) external payable {
+    /*function requestBook(uint _bookId) external payable {
       require(msg.value >= lendingFee);
       //Notify the owner that book is requested
       //Approve+takeownership or transfer
-    }
+    }*/
 
 }
