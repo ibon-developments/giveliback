@@ -42,10 +42,9 @@ Web DApp to track all the books from your library which have been lended to frie
 * Clone the repository `git clone https://github.com/ibon-developments/giveliback.git`
 * On that folder (`giveliback`) setup a Python3 virtual environment `virtualenv -p python3 giveliback` and initiate it `cd giveliback && source bin/activate`
 * Install the required Python modules `pip install -r requirements.txt`
-* Install Angular framework on that folder `npm install -g @angular/cli`
-* Install Bootstrap `npm install bootstrap`
-* [ToDo] Initialise an angular project
-* Initiate the python code `python cherry_server.py` and a webserver will be listening on localhost:8888
+* cd giveliback
+* npm install
+* Initiate the python code `python cherrypy_server.py` and a webserver will be listening on localhost:8888
 * Serving angular code: Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`
 
 ## User actions
