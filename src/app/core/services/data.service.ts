@@ -10,12 +10,9 @@ const httpOptions = {
 @Injectable()
 export class DataService {
 
-  counter: Observable<number>;
-
   constructor(private http: HttpClient) {
 
   }
-
 
   get(url: string): Observable<any>  {
     return this.http.get(url);
@@ -23,7 +20,7 @@ export class DataService {
 
   post(url: string, data: any): Observable<any> {
     const json = JSON.stringify(data);
-    return this.http.post(url, json, httpOptions)
+    return this.http.post(url, json, httpOptions);
   }
 
   put(url: string, data: any): Observable<any> {
