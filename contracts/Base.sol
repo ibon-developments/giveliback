@@ -8,6 +8,10 @@ contract Base {
   address public owner;
   using SafeMath for uint256;
 
+  // **** EVENTS
+  // @notice Error log
+  event Error(string _error);
+  // @notice Contract ownership change
   event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
   /**
@@ -30,8 +34,7 @@ contract Base {
    * @dev Allows the current owner to transfer control of the contract to a newOwner.
    * @param newOwner The address to transfer ownership to.
    */
-  function transferOwnership(address newOwner) public onlyOwner {
-    require(newOwner != address(0));
+  function transferOwnership(address newOwner) public onlyOwner validDestinationAddress(newOwner){
     emit OwnershipTransferred(owner, newOwner);
     owner = newOwner;
   }
@@ -50,9 +53,6 @@ contract Base {
     emit Error(_error);
   }
 
-  // **** EVENTS
-  // @notice Error log
-  event Error(string _error);
 
   /**
    * @dev Constructor ensures who is the owner of the contract
