@@ -26,6 +26,10 @@ contract BookShelf is Base{
 
     mapping (uint => address) public bookToOwner;
     mapping (address => uint) ownerBooksCount;
+    mapping (uint => address) public bookToBorrower;
+    mapping (address => uint) borrowerBooksCount;
+
+
 
     ///@dev By default, current holder is the msg.sender
     function _createBook(uint64 _isbn) internal {

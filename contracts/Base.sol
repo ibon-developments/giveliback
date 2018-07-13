@@ -24,8 +24,7 @@ contract Base {
 
   ///@notice Preventing sending to 0x0 address or to contract's address
   modifier validDestinationAddress( address to ) {
-      require(to != address(0x0));
-      require(to != address(0)); //Extra
+      require(to != address(0));
       require(to != address(this));
       _;
   }
@@ -61,7 +60,7 @@ contract Base {
   constructor() {
     owner = msg.sender;
     ///@notice Not to end up sending to 0x0
-    if(owner == 0x0) throwError('[Base constructor] Owner address is 0x0');
+    if(owner == address(0)) throwError('[Base constructor] Owner address is 0x0');
   }
 
 }
