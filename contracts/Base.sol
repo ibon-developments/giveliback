@@ -8,6 +8,10 @@ contract Base {
   address public owner;
   using SafeMath for uint256;
 
+  // **** EVENTS
+  // @notice Error log
+  event Error(string _error);
+  // @notice Contract ownership change
   event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
   /**
@@ -20,8 +24,7 @@ contract Base {
 
   ///@notice Preventing sending to 0x0 address or to contract's address
   modifier validDestinationAddress( address to ) {
-      require(to != address(0x0));
-      require(to != address(0)); //Extra
+      require(to != address(0));
       require(to != address(this));
       _;
   }
@@ -30,8 +33,7 @@ contract Base {
    * @dev Allows the current owner to transfer control of the contract to a newOwner.
    * @param newOwner The address to transfer ownership to.
    */
-  function transferOwnership(address newOwner) public onlyOwner {
-    require(newOwner != address(0));
+  function transferOwnership(address newOwner) public onlyOwner validDestinationAddress(newOwner){
     emit OwnershipTransferred(owner, newOwner);
     owner = newOwner;
   }
@@ -50,9 +52,6 @@ contract Base {
     emit Error(_error);
   }
 
-  // **** EVENTS
-  // @notice Error log
-  event Error(string _error);
 
   /**
    * @dev Constructor ensures who is the owner of the contract
@@ -61,7 +60,7 @@ contract Base {
   constructor() {
     owner = msg.sender;
     ///@notice Not to end up sending to 0x0
-    if(owner == 0x0) throwError('[Base constructor] Owner address is 0x0');
+    if(owner == address(0)) throwError('[Base constructor] Owner address is 0x0');
   }
 
 }
