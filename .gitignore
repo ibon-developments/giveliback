@@ -53,3 +53,20 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#Quorum
+/qdata/node1/geth
+/qdata/node1/geth_old
+/qdata/node1/quorum-raft-state
+/qdata/node1/quorum-raft-state_old
+/qdata/node1/raft-wal
+/qdata/node1/raft-wal_old
+/qdata/node1/raft-snap
+/qdata/node1/raft-snap_old
+
+/qdata/node2/geth
+/qdata/node2/geth_old
+/qdata/node2/quorum-raft-state
+/qdata/node2/quorum-raft-state_old
+/qdata/node2/raft-wal
+/qdata/node2/raft-wal_old
