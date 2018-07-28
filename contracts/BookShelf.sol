@@ -32,16 +32,17 @@ contract BookShelf is Base{
 
 
     ///@dev By default, current holder is the msg.sender
-    function _createBook(uint64 _isbn) internal {
+    function _createBook(uint64 _isbn) internal returns (uint256 _bookId){
         uint id = books.push(Book(_isbn, msg.sender,0)).sub(1);
         bookToOwner[id] = msg.sender;
         ownerBooksCount[msg.sender] = ownerBooksCount[msg.sender].add(1);
         emit NewBook(id, _isbn);
+        return id;
     }
 
-    function createBook(uint64 _isbn) public {
+    function createBook(uint64 _isbn) public returns (uint256 _bookId){
         require(ownerBooksCount[msg.sender] < 100); //Only for users that have not more than 100 books
-        _createBook(_isbn);
+        return _createBook(_isbn);
     }
 
 }
