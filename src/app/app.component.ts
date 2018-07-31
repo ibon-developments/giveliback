@@ -9,16 +9,16 @@ import {DataService} from './core/services/data.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor(private _dataService: DataService) {
+  constructor(private dataService: DataService) {
   }
 
   ngOnInit(): void {
-    this._dataService.get('http://127.0.0.1:8888/get_books_by_owner').subscribe((data) => {
+    this.dataService.get('http://127.0.0.1:8888/get_books_by_owner').subscribe((data) => {
       if (data) {
         console.log(data);
       }
     });
-    this._dataService.get('http://127.0.0.1:8888/create_book?book_name=test&isbn=981299902').subscribe((data) => {
+    this.dataService.get('http://127.0.0.1:8888/create_book?book_name=test&isbn=981299902').subscribe((data) => {
       if (data) {
         console.log(data);
       }
