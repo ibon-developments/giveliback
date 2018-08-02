@@ -5,10 +5,8 @@
 Web DApp to track all the books from your library which have been lended to friends and colleagues. A true bond between the analogue and digital world.
 
 ## ToDo
-* Define the user actions
-* Design the architecture
-* Outline the Smart Contract (eventually collectible tokens)
 * Slim the requirements.txt
+* Craft the Angular framework
 
 ## Architecture
 * Angular
@@ -31,7 +29,7 @@ Web DApp to track all the books from your library which have been lended to frie
 `sudo add-apt-repository ppa:ethereum/ethereum`
 `sudo apt-get update`
 `sudo apt-get install solc`
-* Python Modules via requirements.txt {pip, web3py, py-solc, jsonstream, Flask, CherryPy, ...}
+* Python Modules via requirements.txt {pip, web3py, py-solc, Flask, CherryPy, ...}
 * Git
 `sudo apt-get update`
 `sudo apt-get install git`
@@ -44,12 +42,15 @@ Web DApp to track all the books from your library which have been lended to frie
 * Install the required Python modules `pip install -r requirements.txt`
 * cd giveliback
 * npm install
-* Initiate the python code `python cherrypy_server.py` and a webserver will be listening on localhost:8888
+* Initiate the Quorum nodes `quorum_bin\geth --datadir qdata/node1 init genesis.json 2>>qdata/logs/node1.log` for node 1 and `quorum_bin\geth --datadir qdata/node2 init genesis.json 2>>qdata/logs/node2.log` for node 2
+* Launch the nodes `geth --datadir=qdata/node1 --raft --emitcheckpoints --raftport 50401 --unlock 0 --password password.txt --config config.toml 2>>qdata/logs/node1.log` for node 1 and `geth --datadir=qdata/node2 --raft --emitcheckpoints --raftport 50402 --unlock 0 --password password.txt --config config.toml 2>>qdata/logs/node1.log` for node 2
+* Initiate the python code `python cherrypy_server.py` connected to the node 1 and a webserver will be listening on localhost:8888
+* Initiate the python code `python cherrypy_server_2.py` connected to the node 2 and a webserver will be listening on localhost:8889
 * Serving angular code: Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`
 
 ## User actions
 * Users can create their own libraries of books
-* Users can requests books to other users
+* Users can request books to other users
 * Users can lend books to other users
 * Users can request the lended books to be returned
 * Users can return the lended books (or cancel with a drama unfolding!)
@@ -57,6 +58,6 @@ Web DApp to track all the books from your library which have been lended to frie
 ## Smart Contracts
 There are several files of contracts which GiveLibAck relies upon.
 * Base.sol: Contract ownership, overflow management on mathematical functions
+* ERC721.sol: Open standard for non-fungible tokens
 * Bookshelf.sol: Book creation
 * GiveLibAck.sol: Book management including request and lending based on ERC721. Book request involves a payment fee
-
