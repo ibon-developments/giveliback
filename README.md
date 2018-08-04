@@ -43,9 +43,8 @@ Web DApp to track all the books from your library which have been lended to frie
 * cd giveliback
 * npm install
 
-* Quorum
 * For install Quorum read these instructions: `https://ibón.es/2018/07/06/despliegue-de-web-dapp-con-quorumangularpythonflask-en-un-vps-con-ubuntu-16-04/`
-* Initiate Quorum nodes
+* Initiate Quorum nodes:
 * Node 1: `geth --datadir qdata/node1 init genesis.json 2>>qdata/logs/node1.log`
 * Node 2: `geth --datadir qdata/node2 init genesis.json 2>>qdata/logs/node2.log`
 * Launch the nodes:
