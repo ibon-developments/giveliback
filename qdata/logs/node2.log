@@ -1,0 +1,6 @@
+INFO [08-04|10:50:12] Allocated cache and file handles         database=/media/ubuntu/HDD/Proyectos-IntelliJ/giveliback/qdata/node2/geth/chaindata cache=16 handles=16
+INFO [08-04|10:50:13] Writing custom genesis block 
+INFO [08-04|10:50:13] Successfully wrote genesis state         database=chaindata                                                                  hash=64e3f2…8aeb0e
+INFO [08-04|10:50:13] Allocated cache and file handles         database=/media/ubuntu/HDD/Proyectos-IntelliJ/giveliback/qdata/node2/geth/lightchaindata cache=16 handles=16
+INFO [08-04|10:50:13] Writing custom genesis block 
+INFO [08-04|10:50:13] Successfully wrote genesis state         database=lightchaindata                                                                  hash=64e3f2…8aeb0e
