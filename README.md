@@ -40,7 +40,7 @@ Web DApp to track all the books from your library which have been lended to frie
 * Clone the repository `git clone https://github.com/ibon-developments/giveliback.git`
 * On that folder (`giveliback`) setup a Python3 virtual environment `virtualenv -p python3 giveliback` and initiate it `cd giveliback && source bin/activate`
 * Install the required Python modules `pip install -r requirements.txt`
-* sudo pip install --upgrade web3
+* Update web3 with `sudo pip install --upgrade web3`
 * cd giveliback
 
 * For install Quorum read these instructions: `https://ibón.es/2018/07/06/despliegue-de-web-dapp-con-quorumangularpythonflask-en-un-vps-con-ubuntu-16-04/`
@@ -56,7 +56,7 @@ Web DApp to track all the books from your library which have been lended to frie
 * Invoke  `http://localhost:8888/compile_contracts`
 * Invoke  `http://localhost:8888/create_book?book_name=2666&isbn=9788420423920`
 
-* npm install
+* `npm install`
 * Serving angular code: Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`
 
 ## User actions
