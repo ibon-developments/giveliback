@@ -17,7 +17,11 @@ connection = NodeConnector()
 #web3 setup
 #connecting to node 1
 web3 = Web3(HTTPProvider('http://localhost:22000'))
+# Use with local Ethereum or Ganache
+# web3 = Web3(HTTPProvider('http://localhost:8545'))
+# Use with Ethereum
 #default_gas = 4000000
+# Use with Quorum
 default_gas = 3740000000
 #gas limit
 #3689010802
