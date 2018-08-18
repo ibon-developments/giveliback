@@ -9,9 +9,11 @@ from web3 import Web3, HTTPProvider, IPCProvider
 from web3.contract import ConciseContract
 from solc import compile_source, compile_files
 from node_connector import NodeConnector
+from flask_cors import CORS
 
 #flask setup
 app = Flask(__name__)
+CORS(app)
 connection = NodeConnector()
 
 #web3 setup
