@@ -41,6 +41,7 @@ Web DApp to track all the books from your library which have been lended to frie
 * On that folder (`giveliback`) setup a Python3 virtual environment `virtualenv -p python3 giveliback` and initiate it `cd giveliback && source bin/activate`
 * Install the required Python modules `pip install -r requirements.txt`
 * Update web3 with `sudo pip install --upgrade web3`
+* Install flask-cors `pipenv install flask-cors`
 * cd giveliback
 
 * For install Quorum read these instructions: `https://ibón.es/2018/07/06/despliegue-de-web-dapp-con-quorumangularpythonflask-en-un-vps-con-ubuntu-16-04/`
