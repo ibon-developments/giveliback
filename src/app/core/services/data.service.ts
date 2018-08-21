@@ -18,6 +18,10 @@ export class DataService {
     return this.http.get(url);
   }
 
+  getWithParameters(url: string, data: any): Observable<any>  {
+    return this.http.get(url, {params: data});
+  }
+
   post(url: string, data: any): Observable<any> {
     const json = JSON.stringify(data);
     return this.http.post(url, json, httpOptions);
