@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import {CoreModule} from './core/core.module';
 import {BooksModule} from './books/books.module';
 import {AppRoutingModule} from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 
 
 @NgModule({
@@ -16,7 +18,12 @@ import {AppRoutingModule} from './app-routing.module';
     BrowserModule,
     CoreModule,
     AppRoutingModule,
-    BooksModule
+    BooksModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 50000,
+      positionClass: 'toast-bottom-full-width'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
