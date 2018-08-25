@@ -1,3 +1,38 @@
-<p>
-  books works!
-</p>
+<main class="container-fluid">
+  <section class="container">
+    <form [formGroup]="booksForm" (ngSubmit)="onSubmit()" class="form-row
+    m-auto
+    d-flex
+    justify-content-around
+    flex-row
+    border border-dark align-items-center bg-light rounded">
+      <div class="col mx-5 pb-3 col-md-5 form-row">
+        <label for="id" class="input-label col-3">Contract</label>
+        <input type="text" class="form-control" id="contract" formControlName="contract">
+      </div>
+      <div class="col mx-5 pb-3 form-row">
+        <label for="isbn">ISBN</label>
+        <input type="text" class="form-control" id="isbn" formControlName="isbn">
+        <div *ngIf="hasErrors('isbn')" class="form-error">
+          <p *ngIf="getError('isbn', 'required')">
+            Campo requerido
+          </p>
+        </div>
+      </div>
+      <div class="col mx-5 pb-3 form-row">
+        <label for="bookName">Book Name</label>
+        <input type="text" class="form-control" id="bookName" formControlName="bookName">
+        <div *ngIf="hasErrors('bookName')" class="form-error">
+          <p *ngIf="getError('bookName', 'required')">
+            Campo requerido
+          </p>
+        </div>
+      </div>
+      <div class="col-auto mx-5 pt-5">
+      <button class="btn btn-primary col-auto mx-5" (click)="compileContract()">Contract Compile</button>
+      <button class="btn btn-dark col-auto mx-5" (click)="createBook()">Create Book</button>
+      <button class="btn btn-info col-auto mx-5" (click)="getBooksByOwner()">Search Books By Owner</button>
+      </div>
+    </form>
+  </section>
+</main>
