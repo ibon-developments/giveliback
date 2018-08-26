@@ -8,6 +8,7 @@ import {BooksModule} from './books/books.module';
 import {AppRoutingModule} from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+import {SharedModule} from './shared/shared.module';
 
 
 @NgModule({
@@ -19,9 +20,10 @@ import {ToastrModule} from 'ngx-toastr';
     CoreModule,
     AppRoutingModule,
     BooksModule,
+    SharedModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 50000,
+      timeOut: 5000,
       positionClass: 'toast-bottom-full-width'
     })
   ],
