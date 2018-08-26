@@ -19,30 +19,15 @@ export class BooksService {
   getBooksByOwner(): Observable <any> {
     return this.dataService.get('http://127.0.0.1:8888/get_books_by_owner');
   }
-  lendBook(toAddress: string, tokenId: number) {
+  lendBook(toAddress: string, tokenId: number): Observable<any> {
     let params = new HttpParams();
     params = params.append('to', toAddress);
     params = params.append('tokenId', tokenId.toString());
-    this.dataService.getWithParameters('http://127.0.0.1:8888/lend_book', params).subscribe((data) => {
-      if (data) {
-        console.log(data);
-      }
-    });
+    return this.dataService.getWithParameters('http://127.0.0.1:8888/lend_book', params);
   }
-  returnBook(tokenId: number) {
+  returnBook(tokenId: number): Observable<any> {
     let params = new HttpParams();
     params = params.append('tokenId', tokenId.toString());
-    this.dataService.getWithParameters('http://127.0.0.1:8888/return_book', params).subscribe((data) => {
-      if (data) {
-        console.log(data);
-      }
-    });
-  }
-  getBooks() {
-    this.dataService.get('http://127.0.0.1:8888/books').subscribe((data) => {
-      if (data) {
-        console.log(data);
-      }
-    });
+    return this.dataService.getWithParameters('http://127.0.0.1:8888/return_book', params);
   }
 }
