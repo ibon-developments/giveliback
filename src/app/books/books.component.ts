@@ -24,15 +24,20 @@ export class BooksComponent implements OnInit {
 
   buildForm() {
     this.booksForm = this.fb.group({
-      contract: ['', ],
+      contract: [''],
       isbn: ['', [Validators.required, Validators.minLength(5)]],
       bookName: ['', [Validators.required]],
+      receiverAddress: [''],
+      tokenId: [''],
     });
   }
   compileContract() {
     this.contractsService.compileContract().subscribe((data) => {
       if (data) {
         this.booksForm.get('contract').setValue(data[0].contract_address);
+        this.toastService.success('Successfully deployed contract');
+      } else {
+        this.toastService.error('Error deployed contract');
       }
     });
   }
@@ -42,7 +47,7 @@ export class BooksComponent implements OnInit {
   createBook() {
     this.booksService.createBook(this.booksForm.get('isbn').value, this.booksForm.get('bookName').value).subscribe((data) => {
       if (data) {
-        this.toastService.success('Successful operation with creator: ' + data[0].creator +  ' and book name: ' + data[0].book_name);
+        this.toastService.success('Successful operation with creator ' + data[0].creator +  ' and book name ' + data[0].book_name);
       } else {
         this.toastService.error('Error in the creation of book');
       }
@@ -51,23 +56,31 @@ export class BooksComponent implements OnInit {
   getBooksByOwner() {
     this.booksService.getBooksByOwner().subscribe((data) => {
       if (data) {
-        this.toastService.success('Successful operation with owner: ' + data[0].owner +  ' and ' + data[0].token_ids.length + ' tokensId' );
+        this.toastService.success('Successful operation with owner ' + data[0].owner +  ' and ' + data[0].token_ids.length + ' tokensId' );
       } else {
         this.toastService.error('Error in the search of book');
       }
     });
   }
   lendBook() {
-    this.booksService.lendBook('', 12345);
+    this.booksService.lendBook(this.booksForm.get('receiverAddress').value, this.booksForm.get('tokenId').value).subscribe((data) => {
+      if (data) {
+        this.toastService.success('Successful lend book');
+      } else {
+        this.toastService.error('Error in the lend of book');
+      }
+    });
   }
   returnBook() {
-    this.booksService.returnBook(12345);
+    this.booksService.returnBook(this.booksForm.get('tokenId').value).subscribe((data) => {
+      if (data) {
+        this.toastService.success('Successful return book with issuer ' + data[0].issuer +  ' and token id ' + data[0].token_id);
+      } else {
+        this.toastService.error('Error in the return of book');
+      }
+    });
   }
-  getBooks() {
-    this.booksService.getBooks();
-  }
-  onSubmit() {
-  }
+
   hasErrors(field: string) {
     return (!this.booksForm.get(field).valid && this.booksForm.get(field).touched) ||
       (this.booksForm.get(field).untouched && this.formSubmitAttempt);

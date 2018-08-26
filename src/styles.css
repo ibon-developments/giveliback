@@ -1,2 +1,3 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import '~ngx-toastr/toastr.css';
+@import "styles/main.css";
