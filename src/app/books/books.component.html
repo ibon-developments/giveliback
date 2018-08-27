@@ -5,7 +5,7 @@
     d-flex
     justify-content-around
     flex-row
-    border border-dark align-items-center bg-light rounded">
+    border border-dark align-items-center bg-light rounded pt-4 pb-5">
       <div class="col mx-1 pb-3 col-md-5 form-row">
         <label for="id" class="input-label col-3">Contract</label>
         <input type="text" class="form-control" id="contract" formControlName="contract">
@@ -13,31 +13,21 @@
       <div class="col mx-1 pb-3 col-md-3 form-row">
         <label for="isbn">ISBN</label>
         <input type="text" class="form-control" id="isbn" formControlName="isbn">
-        <div *ngIf="hasErrors('isbn')" class="form-error">
-          <p *ngIf="getError('isbn', 'required')">
-            Campo requerido
-          </p>
-        </div>
       </div>
       <div class="col mx-1 pb-3 col-md-3 form-row">
         <label for="bookName">Book Name</label>
         <input type="text" class="form-control" id="bookName" formControlName="bookName">
-        <div *ngIf="hasErrors('bookName')" class="form-error">
-          <p *ngIf="getError('bookName', 'required')">
-            Campo requerido
-          </p>
-        </div>
       </div>
-      <div class="col mx-3 pb-3 col-md-5 form-row">
+      <div class="col mr-auto ml-3 pb-3 col-md-5 form-row">
         <label for="receiverAddress">Receiver Address</label>
         <input type="text" class="form-control" id="receiverAddress" formControlName="receiverAddress">
       </div>
-      <div class="col mx-3 pb-3 col-md-1 form-row">
+      <div class="col mr-5 pb-3 col-md-3 form-row token-margin">
         <label for="tokenId">Token Id</label>
         <input type="text" class="form-control" id="tokenId" formControlName="tokenId">
       </div>
         <div class="col-auto mx-5 pt-5">
-        <button class="btn btn-primary col-auto mx-5" (click)="compileContract()">Contract Compile</button>
+        <button class="btn btn-primary col-auto mx-5" (click)="compileContract()">Compile Contract</button>
         <button class="btn btn-warning col-auto mx-5" (click)="createBook()">Create Book</button>
         <button class="btn btn-info col-auto mx-5" (click)="getBooksByOwner()">Search Books</button>
         <button class="btn btn-secondary col-auto mx-5" (click)="lendBook()">Lend Book</button>
