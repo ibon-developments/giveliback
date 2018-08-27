@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BooksComponent implements OnInit {
   booksForm: FormGroup;
-  private formSubmitAttempt: boolean;
   constructor(private fb: FormBuilder,
               private contractsService: ContractsService,
               private booksService: BooksService,
@@ -25,8 +24,8 @@ export class BooksComponent implements OnInit {
   buildForm() {
     this.booksForm = this.fb.group({
       contract: [''],
-      isbn: ['', [Validators.required, Validators.minLength(5)]],
-      bookName: ['', [Validators.required]],
+      isbn: [''],
+      bookName: [''],
       receiverAddress: [''],
       tokenId: [''],
     });
@@ -40,9 +39,6 @@ export class BooksComponent implements OnInit {
         this.toastService.error('Error deployed contract');
       }
     });
-  }
-  instanceContract() {
-    this.contractsService.instanceContract('');
   }
   createBook() {
     this.booksService.createBook(this.booksForm.get('isbn').value, this.booksForm.get('bookName').value).subscribe((data) => {
@@ -79,14 +75,6 @@ export class BooksComponent implements OnInit {
         this.toastService.error('Error in the return of book');
       }
     });
-  }
-
-  hasErrors(field: string) {
-    return (!this.booksForm.get(field).valid && this.booksForm.get(field).touched) ||
-      (this.booksForm.get(field).untouched && this.formSubmitAttempt);
-  }
-  getError(field: string, validator: string) {
-    return this.booksForm.get(field).errors ? this.booksForm.get(field).errors[validator] : false;
   }
 
 }
