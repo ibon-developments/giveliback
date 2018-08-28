@@ -1,0 +1,16 @@
+.logo-left {
+  float: left;
+  height: 135px;
+  margin: 0px 1px;
+}
+
+.logo-right {
+  float: right;
+  height: 34px;
+  margin: 20px 7px;
+  color: lightseagreen;
+}
+
+.token-margin {
+  margin-right: 324px !important;
+}

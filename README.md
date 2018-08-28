@@ -41,6 +41,7 @@ Web DApp to track all the books from your library which have been lended to frie
 * On that folder (`giveliback`) setup a Python3 virtual environment `virtualenv -p python3 giveliback` and initiate it `cd giveliback && source bin/activate`
 * Install the required Python modules `pip install -r requirements.txt`
 * Update web3 with `sudo pip install --upgrade web3`
+* Install flask-cors `pipenv install flask-cors`
 * cd giveliback
 
 * For install Quorum read these instructions: `https://ibón.es/2018/07/06/despliegue-de-web-dapp-con-quorumangularpythonflask-en-un-vps-con-ubuntu-16-04/`
@@ -50,6 +51,7 @@ Web DApp to track all the books from your library which have been lended to frie
 * Launch the nodes:
 * Node 1: `geth --datadir=qdata/node1 --raft --emitcheckpoints --raftport 50401 --unlock 0 --password password.txt --config config.toml 2>>qdata/logs/node1.log`
 * Node 2: `geth --datadir=qdata/node2 --raft --emitcheckpoints --raftport 50402 --unlock 0 --password password.txt --config config_2.toml 2>>qdata/logs/node2.log`
+* If you have errors with gas limit reached: `geth --datadir=qdata/node1 --raft --emitcheckpoints --raftport 50401 --unlock 0 --password password.txt --config config.toml --targetgaslimit 3758096384 2>qdata/logs/node1.log`
 
 * Initiate the python code `python cherrypy_server.py` connected to the node 1 and a webserver will be listening on localhost:8888
 * Initiate the python code `python cherrypy_server_2.py` connected to the node 2 and a webserver will be listening on localhost:8889
