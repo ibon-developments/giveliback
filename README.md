@@ -86,6 +86,11 @@ Web DApp to track all the books from your library which have been lended to frie
  `ipfs name publish <hash-generated-from-previous-command>`
  
  `ipfs name resolve <hash-generated-from-previous-command>`
+ 
+* URL with Giveliback in IPFS and backend in localhost:
+
+  https://ipfs.io/ipfs/QmRMcacKdbKAFyoejrQ3eHztT4LE8a9zSSDVGJVABWseii/
+ 
 
 ## User actions
 * Users can create their own libraries of books
