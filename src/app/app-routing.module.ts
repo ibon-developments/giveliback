@@ -6,10 +6,10 @@ import {RouterModule } from '@angular/router';
   imports: [
     RouterModule.forRoot([
     {
-      path: '',
+      path: '**',
       pathMatch: 'full',
       redirectTo: '/books',
-    }
+    },
     ])
   ],
   exports: [RouterModule]

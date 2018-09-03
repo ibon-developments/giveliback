@@ -36,6 +36,8 @@ Web DApp to track all the books from your library which have been lended to frie
 ##### Frontend:
 * Node.js `curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -` `after sudo apt-get install -y nodejs`
 * NPM `apt-get install npm`
+* `npm install`
+* Serving angular code: Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`
 #### Steps
 * Clone the repository `git clone https://github.com/ibon-developments/giveliback.git`
 * On that folder (`giveliback`) setup a Python3 virtual environment `virtualenv -p python3 giveliback` and initiate it `cd giveliback && source bin/activate`
@@ -58,8 +60,37 @@ Web DApp to track all the books from your library which have been lended to frie
 * Invoke  `http://localhost:8888/compile_contracts`
 * Invoke  `http://localhost:8888/create_book?book_name=2666&isbn=9788420423920`
 
-* `npm install`
-* Serving angular code: Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`
+####  IPFS
+* Install IPFS
+`sudo apt-get update`
+
+`sudo apt-get install golang-go -y`
+
+`wget https://dist.ipfs.io/go-ipfs/v0.4.10/go-ipfs_v0.4.10_linux-386.tar.gz`
+
+`tar xvfz go-ipfs_v0.4.10_linux-386.tar.gz`
+
+`ipfs --version`
+
+* Use IPFS
+ `ipfs init`
+ 
+ `ng build`
+ 
+ `in dist folder comment   <!--<base href="/">-->`
+ 
+ `ipfs add -r dist`
+ 
+ `Optional:`
+ 
+ `ipfs name publish <hash-generated-from-previous-command>`
+ 
+ `ipfs name resolve <hash-generated-from-previous-command>`
+ 
+* URL with Giveliback in IPFS and backend in localhost:
+
+  https://ipfs.io/ipfs/QmRMcacKdbKAFyoejrQ3eHztT4LE8a9zSSDVGJVABWseii/
+ 
 
 ## User actions
 * Users can create their own libraries of books
