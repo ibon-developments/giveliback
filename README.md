@@ -4,9 +4,12 @@
 
 Web DApp to track all the books from your library which have been lended to friends and colleagues. A true bond between the analogue and digital world.
 
+## Blog posts (Spanish)
+[Despliegue De Web ÐApp Con Quorum+Angular+Python+Flask En Un VPS Con Ubuntu 16.04](https://xn--ibn-hna.es/2018/07/06/despliegue-de-web-dapp-con-quorumangularpythonflask-en-un-vps-con-ubuntu-16-04/)
+
+
 ## ToDo
 * Slim the requirements.txt
-* Craft the Angular framework
 
 ## Architecture
 * Angular
