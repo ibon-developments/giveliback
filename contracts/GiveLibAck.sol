@@ -1,4 +1,5 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.5.1;
+
 import "./BookShelf.sol";
 import "./ERC721.sol";
 
@@ -42,7 +43,7 @@ contract GiveLibAck is BookShelf, ERC721 {
   }
 
   ///@author CryptoZombies
-  function getBooksByOwner(address _owner) external view returns(uint[]) {
+  function getBooksByOwner(address _owner) external view returns(uint[] memory) {
     uint[] memory result = new uint[](ownerBooksCount[_owner]);
     uint counter = 0;
     for (uint i = 0; i < books.length; i=i.add(1)) {
@@ -55,7 +56,7 @@ contract GiveLibAck is BookShelf, ERC721 {
   }
 
   ///@author CryptoZombies
-  function getBooksByBorrower(address _borrower) external view returns(uint[]) {
+  function getBooksByBorrower(address _borrower) external view returns(uint[] memory) {
     uint[] memory result = new uint[](borrowerBooksCount[_borrower]);
     uint counter = 0;
     for (uint i = 0; i < books.length; i=i.add(1)) {
