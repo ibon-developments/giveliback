@@ -1,4 +1,5 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.5.1;
+
 import "./Base.sol";
 
 /// @title GiveLibAck | GiveLiBack. A true bond between the analogue and digital world

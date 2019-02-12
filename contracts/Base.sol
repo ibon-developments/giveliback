@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.5.1;
 
 
 contract Base {
@@ -40,7 +40,7 @@ contract Base {
 
   /// @notice Get the current timestamp from last mined block
   /// @return now is an alias to block.timestamp
-  function timestamp() public constant returns (uint256) {
+  function timestamp() public view returns (uint256) {
     return now;
   }
 
@@ -48,7 +48,7 @@ contract Base {
    * @dev Notifies the user something went wrong
    * @param _error Message of error to notify
    */
-  function throwError(string _error) internal {
+  function throwError(string memory _error) internal  {
     emit Error(_error);
   }
 
@@ -57,7 +57,7 @@ contract Base {
    * @dev Constructor ensures who is the owner of the contract
    * account.
    */
-  constructor() {
+  constructor() public {
     owner = msg.sender;
     ///@notice Not to end up sending to 0x0
     if(owner == address(0)) throwError('[Base constructor] Owner address is 0x0');
@@ -67,157 +67,257 @@ contract Base {
 
 
 /**
- * Commit: 20180509
+ * Commit: 20190117
  * OpenZeppelin
- * https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol
- * @title SafeMath
+https://github.com/OpenZeppelin/openzeppelin-solidity/commit/b7d60f2f9a849c5c2d59e24062f9c09f3390487a * @title SafeMath
  * @dev Math operations with safety checks that throw on error
  */
 library SafeMath {
+    /**
+    * @dev Multiplies two unsigned integers, reverts on overflow.
+    */
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
+        // benefit is lost if 'b' is also tested.
+        // See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522
+        if (a == 0) {
+            return 0;
+        }
 
-  /**
-  * @author OpenZeppelin
-  * @dev Multiplies two numbers, throws on overflow.
-  */
-  function mul(uint256 a, uint256 b) internal pure returns (uint256 c) {
-    // Gas optimization: this is cheaper than asserting 'a' not being zero, but the
-    // benefit is lost if 'b' is also tested.
-    // See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522
-    if (a == 0) {
-      return 0;
+        uint256 c = a * b;
+        require(c / a == b);
+
+        return c;
     }
 
-    c = a * b;
-    assert(c / a == b);
-    return c;
-  }
+    /**
+    * @dev Integer division of two unsigned integers truncating the quotient, reverts on division by zero.
+    */
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        // Solidity only automatically asserts when dividing by 0
+        require(b > 0);
+        uint256 c = a / b;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
 
-  /**
-  * @dev Integer division of two numbers, truncating the quotient.
-  */
-  function div(uint256 a, uint256 b) internal pure returns (uint256) {
-    // assert(b > 0); // Solidity automatically throws when dividing by 0
-    // uint256 c = a / b;
-    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
-    return a / b;
-  }
+        return c;
+    }
 
-  /**
-  * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
-  */
-  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
-    assert(b <= a);
-    return a - b;
-  }
+    /**
+    * @dev Subtracts two unsigned integers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+    */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        require(b <= a);
+        uint256 c = a - b;
 
-  /**
-  * @dev Adds two numbers, throws on overflow.
-  */
-  function add(uint256 a, uint256 b) internal pure returns (uint256 c) {
-    c = a + b;
-    assert(c >= a);
-    return c;
-  }
+        return c;
+    }
+
+    /**
+    * @dev Adds two unsigned integers, reverts on overflow.
+    */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a);
+
+        return c;
+    }
+
+    /**
+    * @dev Divides two unsigned integers and returns the remainder (unsigned integer modulo),
+    * reverts when dividing by zero.
+    */
+    function mod(uint256 a, uint256 b) internal pure returns (uint256) {
+        require(b != 0);
+        return a % b;
+    }
 }
-
 
 /**
  * @title SafeMath32
  * @dev SafeMath library implemented for uint32
  */
 library SafeMath32 {
+    /**
+    * @dev Multiplies two unsigned integers, reverts on overflow.
+    */
+    function mul(uint32 a, uint32 b) internal pure returns (uint32) {
+        // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
+        // benefit is lost if 'b' is also tested.
+        // See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522
+        if (a == 0) {
+            return 0;
+        }
 
-  function mul(uint32 a, uint32 b) internal pure returns (uint32) {
-    if (a == 0) {
-      return 0;
+        uint32 c = a * b;
+        require(c / a == b);
+
+        return c;
     }
-    uint32 c = a * b;
-    assert(c / a == b);
-    return c;
-  }
 
-  function div(uint32 a, uint32 b) internal pure returns (uint32) {
-    // assert(b > 0); // Solidity automatically throws when dividing by 0
-    uint32 c = a / b;
-    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
-    return c;
-  }
+    /**
+    * @dev Integer division of two unsigned integers truncating the quotient, reverts on division by zero.
+    */
+    function div(uint32 a, uint32 b) internal pure returns (uint32) {
+        // Solidity only automatically asserts when dividing by 0
+        require(b > 0);
+        uint32 c = a / b;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
 
-  function sub(uint32 a, uint32 b) internal pure returns (uint32) {
-    assert(b <= a);
-    return a - b;
-  }
+        return c;
+    }
 
-  function add(uint32 a, uint32 b) internal pure returns (uint32) {
-    uint32 c = a + b;
-    assert(c >= a);
-    return c;
-  }
+    /**
+    * @dev Subtracts two unsigned integers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+    */
+    function sub(uint32 a, uint32 b) internal pure returns (uint32) {
+        require(b <= a);
+        uint32 c = a - b;
+
+        return c;
+    }
+
+    /**
+    * @dev Adds two unsigned integers, reverts on overflow.
+    */
+    function add(uint32 a, uint32 b) internal pure returns (uint32) {
+        uint32 c = a + b;
+        require(c >= a);
+
+        return c;
+    }
+
+    /**
+    * @dev Divides two unsigned integers and returns the remainder (unsigned integer modulo),
+    * reverts when dividing by zero.
+    */
+    function mod(uint32 a, uint32 b) internal pure returns (uint32) {
+        require(b != 0);
+        return a % b;
+    }
 }
-
 /**
  * @title SafeMath16
  * @dev SafeMath library implemented for uint16
  */
 library SafeMath16 {
+    /**
+    * @dev Multiplies two unsigned integers, reverts on overflow.
+    */
+    function mul(uint16 a, uint16 b) internal pure returns (uint16) {
+        // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
+        // benefit is lost if 'b' is also tested.
+        // See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522
+        if (a == 0) {
+            return 0;
+        }
 
-  function mul(uint16 a, uint16 b) internal pure returns (uint16) {
-    if (a == 0) {
-      return 0;
+        uint16 c = a * b;
+        require(c / a == b);
+
+        return c;
     }
-    uint16 c = a * b;
-    assert(c / a == b);
-    return c;
-  }
 
-  function div(uint16 a, uint16 b) internal pure returns (uint16) {
-    // assert(b > 0); // Solidity automatically throws when dividing by 0
-    uint16 c = a / b;
-    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
-    return c;
-  }
+    /**
+    * @dev Integer division of two unsigned integers truncating the quotient, reverts on division by zero.
+    */
+    function div(uint16 a, uint16 b) internal pure returns (uint16) {
+        // Solidity only automatically asserts when dividing by 0
+        require(b > 0);
+        uint16 c = a / b;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
 
-  function sub(uint16 a, uint16 b) internal pure returns (uint16) {
-    assert(b <= a);
-    return a - b;
-  }
+        return c;
+    }
 
-  function add(uint16 a, uint16 b) internal pure returns (uint16) {
-    uint16 c = a + b;
-    assert(c >= a);
-    return c;
-  }
+    /**
+    * @dev Subtracts two unsigned integers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+    */
+    function sub(uint16 a, uint16 b) internal pure returns (uint16) {
+        require(b <= a);
+        uint16 c = a - b;
+
+        return c;
+    }
+
+    /**
+    * @dev Adds two unsigned integers, reverts on overflow.
+    */
+    function add(uint16 a, uint16 b) internal pure returns (uint16) {
+        uint16 c = a + b;
+        require(c >= a);
+
+        return c;
+    }
+
+    /**
+    * @dev Divides two unsigned integers and returns the remainder (unsigned integer modulo),
+    * reverts when dividing by zero.
+    */
+    function mod(uint16 a, uint16 b) internal pure returns (uint16) {
+        require(b != 0);
+        return a % b;
+    }
 }
 
 
 library SafeMath64 {
+    /**
+    * @dev Multiplies two unsigned integers, reverts on overflow.
+    */
+    function mul(uint64 a, uint64 b) internal pure returns (uint64) {
+        // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
+        // benefit is lost if 'b' is also tested.
+        // See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522
+        if (a == 0) {
+            return 0;
+        }
 
-  function mul(uint64 a, uint64 b) internal pure returns (uint64) {
-    if (a == 0) {
-      return 0;
+        uint64 c = a * b;
+        require(c / a == b);
+
+        return c;
     }
-    uint64 c = a * b;
-    assert(c / a == b);
-    return c;
-  }
 
-  function div(uint64 a, uint64 b) internal pure returns (uint64) {
-    // assert(b > 0); // Solidity automatically throws when dividing by 0
-    uint64 c = a / b;
-    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
-    return c;
-  }
+    /**
+    * @dev Integer division of two unsigned integers truncating the quotient, reverts on division by zero.
+    */
+    function div(uint64 a, uint64 b) internal pure returns (uint64) {
+        // Solidity only automatically asserts when dividing by 0
+        require(b > 0);
+        uint64 c = a / b;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
 
-  function sub(uint64 a, uint64 b) internal pure returns (uint64) {
-    assert(b <= a);
-    return a - b;
-  }
+        return c;
+    }
 
-  function add(uint64 a, uint64 b) internal pure returns (uint64) {
-    uint64 c = a + b;
-    assert(c >= a);
-    return c;
-  }
+    /**
+    * @dev Subtracts two unsigned integers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+    */
+    function sub(uint64 a, uint64 b) internal pure returns (uint64) {
+        require(b <= a);
+        uint64 c = a - b;
+
+        return c;
+    }
+
+    /**
+    * @dev Adds two unsigned integers, reverts on overflow.
+    */
+    function add(uint64 a, uint64 b) internal pure returns (uint64) {
+        uint64 c = a + b;
+        require(c >= a);
+
+        return c;
+    }
+
+    /**
+    * @dev Divides two unsigned integers and returns the remainder (unsigned integer modulo),
+    * reverts when dividing by zero.
+    */
+    function mod(uint64 a, uint64 b) internal pure returns (uint64) {
+        require(b != 0);
+        return a % b;
+    }
 }
 
 /**
