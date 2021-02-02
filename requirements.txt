@@ -1,6 +1,6 @@
 attrdict==2.0.0
 backports.functools-lru-cache==1.5
-bleach==2.1.2
+bleach==3.3.0
 certifi==2018.1.18
 chardet==3.0.4
 cheroot==6.3.1
