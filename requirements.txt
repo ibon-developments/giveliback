@@ -51,7 +51,7 @@ prompt-toolkit==1.0.15
 ptyprocess==0.5.2
 py-solc==2.1.0
 pycryptodome==3.4.11
-Pygments==2.2.0
+Pygments==2.7.4
 pysha3==1.0.2
 python-dateutil==2.6.1
 pytz==2018.4
